@@ -18,7 +18,7 @@ resource "google_compute_disk" "disk" {
   type  = "pd-ssd"
   zone  = "${var.zone}"
   image = "debian-cloud/debian-9"
-  size  = "60GB"
+  size  = 60
 }
 
 resource "google_compute_instance" "default" {
@@ -26,9 +26,11 @@ resource "google_compute_instance" "default" {
   machine_type = "n1-highmem-2"
   zone         = "${var.zone}"
 
+  metadata_startup_script = "${file("./machine_startup.sh")}"
+
   boot_disk {
     auto_delete = false
-    source      = "${google_compute_disk.disk.source_image_id}"
+    source      = "${google_compute_disk.disk.name}"
   }
 
   guest_accelerator = {
@@ -46,6 +48,6 @@ resource "google_compute_instance" "default" {
 
   scheduling {
     preemptible       = true
-    automatic_restart = true
+    automatic_restart = false
   }
 }
