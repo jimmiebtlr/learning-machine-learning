@@ -7,8 +7,6 @@ services:
     working_dir: "/ml"
     environment:
       - "GOOGLE_CREDENTIALS=/key.json"
-      - "TF_VAR_gcloud_project_id=personal-172200"
-      - "TF_VAR_zone=asia-east1-c"
     volumes:
       - "./:/ml"
       - "~/keys/personal-172200.json:/key.json"
@@ -20,8 +18,6 @@ services:
     command: "terraform apply"
     environment:
       - "GOOGLE_CREDENTIALS=/key.json"
-      - "TF_VAR_gcloud_project_id=personal-172200"
-      - "TF_VAR_zone=asia-east1-c"
     volumes:
       - "./:/ml"
       - "~/keys/personal-172200.json:/key.json"
